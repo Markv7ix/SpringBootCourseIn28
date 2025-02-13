@@ -1,0 +1,97 @@
+---Kafka---
+Real time data streaming platform.
+Messaging service, resilient, high scalable, based on client pull messaging.
+Uses brokers, producers and consumers
+It works using topics, partitions, logs
+
+Kafka Architecture consists of:
+- Producer
+- Broker
+  - Topic
+    - Partition. Immutable, append only logs. Each partition is asigned to only one consumer on consumer group, so messages are not shared.
+- Consumer
+- Log
+- Offset. Next read position mantained by the broker
+- Key. Used to take the message to the same Topic/Partition
+- Cluster. Formed by two or more Brokers
+- Consumer group. A label to identify those consumers consuming from the same Topic
+- Leader Broker, which takes the messages from the producer
+- Follower broker, where the messages are being replicated from the leader, consumers can read from both Lead or followers
+  
+Kafka Message (Record):
+- Key
+- Headers: Key-Value pairs
+- Payload (Value) -> Event: Anyhing that can be represented with a byte array (Max 1MB)
+
+===Kafka CLI===
+
+--Start Kafka Server
+bin/kafka-server-start.sh config/kraft/server.properties
+
+--Stop Kafka Server
+bin/kafka-server-stop.sh
+
+--List topics
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+--Create topics
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic my.new.topic
+
+--Get information about topics
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic my.new.topic
+
+--Modify # of partition in a topic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic my.new.topic --partitions 3
+
+--Delete a topic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic my.new.topic
+
+Consumer group: Collection of consumers working together
+
+--List consumer groups
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+
+--List consumer groups
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --decribe --group my.new.group
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --decribe --group my.new.group --state
+
+
+--Start Consumer
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic cg.demo.topic --group my.new.group
+
+===Spring Kafka===
+@Component
+public class OrderCreatedHandler {
+
+  String ORDER_DISPATCH_TOPIC = "order.dispatch"
+  KafkaTemplate<String, Object> kafkaProducer;
+
+  @KafkaListener(
+    id="orderConsumerClient",
+    topics= "order.created",
+    groupId= "dispatch.order.created.consumer")
+  public void listen(@Header(KafkaHeaders.RECEIVED_KEY) String key, 
+                     @Header(KafkaHeaders.PARTITION) Integer partition,
+                     @Payload String payload) {
+    log.debug("Partition: " + partition + " key: " + key  + " Payload: " + payload);
+    doStuff(key, payload)
+  }
+
+  
+  private void doStuff(String key, String payload) {
+    kafkaProducer.send(ORDER_DISPATCH_TOPIC, key, payload);
+  }
+
+}
+
+==application.properties==
+spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+spring.kafka.consumer.properties.spring.deserializer.value.delegate.class=org.springframework.kafka.support.serializer.JsonDeserializer
+
+Broker config: auto.create.topics (default true)
+
+Consumer config: allow.auto.create (default true)
+
+Console Producer --> Kafka Broker (Order.Created) --> SpringApplication(KafkaListenerContainerFactory(ConsumerFactory)->KafkaTemplate(ProducerFactory)) --> Kafka Broker (Order.Dispatch) --> Console Consumer
+
+By default the topic is automatically created if it does not exist yet, when the producer sends a message.
