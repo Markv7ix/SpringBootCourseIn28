@@ -1,0 +1,269 @@
+Entrevista Optum
+
+1. Experiencia personal y background (años de experiencia, stack, proyectos, orientación del proyecto, responsabilidades)
+
+2. Las anotaciones más utilzadas en Spring Rest Services
+@SpringBootApplication, @RestController @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @RequestBody, @RequestParam, @PathVariable
+
+3. La diferencia entre @RequestParam, @PathVariable
+
+4. Cuál es la principal causa de obtener un JsonMappingException
+* JsonMappingException: Can Not Construct Instance Of
+* JsonMappingException: No Suitable Constructor
+* JsonMappingException: Can Not Deserialize Instance Of
+
+5. ¿Cuándo se usa un POST request y cuándo se usa PUT?
+
+6. Cómo detectar un bottleneck en una arquitectura de Microservicios
+
+7. Dado un arreglo de enteros cualquiera  int [] array = {1, 2, 2, 4, 5, 8, 8, 7} 
+a. Encontrar los elementos duplicados.    
+b. Encontar el 2° valor más alto. 
+
+8. Dada las tablas, 
+#Table Score
+id name dept  score
+-- ---- ----- -----
+1  Bob	Mkt   101
+2  Greg Dev   205
+3  Rob	HR    302
+4  Mia	Sls   245
+5  John Mkt   180
+
+#Table Status
+id name status   score_id
+-- ---- -------- --------
+1  Bob  active   1
+2  Mia  active   4
+4  John inactive 5
+
+ a. Generar el SQL para obtener los elementos con nombre duplicado
+select * from (select dept, count(*) as num from scores group by dept) where num > 1
+
+ b. Generar el SQL para obtener el score promedio por departamento
+select dept, avg(score) as prom from scores group by dept;
+
+ c. Generar el SQL para actualizar el score a 0 de los empleados con status 'inactive'
+update score set score = 0 where id in (select score_id from status where status = 'inactive')
+
+9. ¿Cuál es la diferencia de un response code 400 y un 401?
+
+10. En una BD NoSQL, ¿qué pasa si se hace una consulta sin partition key?
+
+11. ¿Qué utilizas para mantener la buena calidad del código? JUnit, Integration Tests, Sonarqube, Sonarlit, Code review
+
+12. Preguntas sobre experiencia en diferentes tecnologías: Azure, Kubernetes, frameworks de JS, bases NoSQL (Mongo), Queues & Messaging (Kafka)
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Java 8 New Feat
+- Stream API
+- Lambda expressions
+- Functional interfaces
+- Interfaces can have static and default methods
+- Method references (Instead of a lambda)
+- Adding the generic Optional <T>
+
+Java 9
+- Enhanced switch
+
+Java 11 New Feat
+- New String methods lines, isBlank, strip, stripLeading, stripTrailing, repeat
+- New File methods writeString, readString
+- toArray Method
+- New Http Client
+- We don’t need to compile the Java source files with javac explicitly
+  Instead, we can directly run the file using the java command: $ java HelloWorld.java
+- Deprecated Modules removed (Java EE, CORBA)
+- Local-Variable Syntax for Lambda parameters: Use var in lambda expressions
+
+Java 17 New Feat
+- Sealed Classes: Allows developers to define restricted class hierarchies.
+   final - No other class can extend from a final class
+   sealed - Ensures inheritance is allowed but controlled by classes after "permits" keyword
+   non-sealed - Any class can extend from a non-sealed class
+- Pattern Matching for instanceof: Simplifies type checking.
+- Records: Introduces compact syntax for immutable data classes.
+- Strong Encapsulation by Default: Further improves module system enforcement introduced in Java 9.
+- Foreign Function & Memory API (Incubator): Facilitates better native interoperation.
+
+Java Best Practices
+- Use naming conventions
+- Use encapsulation
+- Create class with single responsability
+- Comment code, document and self-document code
+- Close resources after using them like file or connection
+- Do not use empty catch blocks
+- Proper handling of NPE
+- Use trusted Java libraries
+- Code test covered
+
+New Java keywords
+
+record - Defines a record class
+yield - Used in enhanced switch statements to evaluate and return the value of an expression
+sealed - Defines a class as sealed, so its not
+non-sealed - Breaks and opens the inheritance control 
+permits - Permits a class to inherit from a sealed class
+
+
+Question 12: What are the main principles of OOP?
+Encapsulation: The binding (or wrapping) of data and methods that operate on the data into a single unit called a ‘class’. It also means hiding data (i.e., private variables) from direct access.
+Abstraction: Hiding the complex implementation details of an operation while exposing a simple interface.
+Inheritance: Allows a new class to inherit properties and methods of an existing class.
+Polymorphism: The ability of different classes to provide a unique interface by exposing a method that can behave differently.
+
+
+insert into scores (id, name, dept, score) values (1, 'Bob', 'Mkt', 101);
+insert into scores (id, name, dept, score) values (2, 'Greg', 'Dev', 205);
+insert into scores (id, name, dept, score) values (3, 'Rob', 'HR', 302);
+insert into scores (id, name, dept, score) values (4, 'Mia', 'Sls', 245);
+insert into scores (id, name, dept, score) values (5, 'John', 'Mkt', 180);
+
+
+create table status (id integer, name varchar(100), status varchar(10), score_id integer)
+
+---------------------------------------------------------------------------------------------
+
+1. Java 8 - Features introduce in Java 8 , stream , optional
+2. How you can sort  an  employee based on age
+3. Static variables
+4. In which scenario can't class be inherited.
+5. Spring- core related question ?-@component ,@configuration
+6. How we create Spring boot application step wise ?
+7. How can we configure two data sources in Spring boot ?
+8. How can we achieve global exceptional handling ?
+9. Which Security framework do you use? and how did you implement it ?
+10. JWT -How is JWT session expired and maintained ?
+11. Hibernate vs JPA
+12. One to Many Vs Many to one Associations
+13. If in a method you are inserting in two table and trying to insert in 3rd table some exception occurs , we want to rollback before two inserts as well - How you 14. are going to manage?
+15. Cascade Type
+16. Primary cache vs Secondary cache?
+17. Rest webservice
+18. Put http method vs Patch http method
+19. SQL related questions
+20. Real time problem which you encountered in your project .
+
+
+---------------------------------------------------------------------------------------------
+Kaiser Interview
+
+Java
+Java is a high level programming language based on the principles of object-oriented programming and can be used to develop large-scale applications.
+
+Platform independent since needs only a runtime environment (JRE) installed on the machine to run the code (byte code)
+
+Java supports primitive data types like byte, boolean, char, short, int, float, long
+
+
+Data encapsulation is a concept of OOP of hiding data attribute 
+
+Design Patterns
+Creational,
+ -Factory
+ -Singleton
+ -Builder
+ -Prototype (duplicate object w performance in mind)
+Structural
+ -Adapter
+ -Bridge
+ -Composite
+Behavioral
+
+Rest
+ -
+ -
+
+
+Spring boot
+
+
+CI/CD
+
+
+Kubernates
+
+
+Docker
+
+
+Threads
+
+
+Micro servicios
+
+
+Architectural Patterns
+- Circuit Breaker
+- client-Server
+- Strangler
+- Static content hosting
+- Sharding (Data segmentation to speed commands or queries)
+
+
+Cómo le das seguridad a una API REST
+
+////////////////////////////////////////////////////////
+
+/**
+ * Format number
+ **/
+double value = 4.2352989244d;
+assertThat(String.format("%.2f", value)).isEqualTo("4.24");
+assertThat(String.format("%.3f", value)).isEqualTo("4.235");
+
+
+
+        Map<Integer, Integer> elementsMap = new HashMap<>();
+        for(Integer i : a) {
+            
+        }
+        
+        for(Entry<Integer, Integer> entry : elementsMap.entrySet()) {
+            if(entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+
+
+   /*
+     * Complete the 'lonelyinteger' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts INTEGER_ARRAY a as parameter.
+     */
+
+    public static int lonelyinteger(List<Integer> a) {
+    // Write your code here
+        
+        Set<Integer> probedSet = new HashSet<>();
+        for(Integer i : a) {
+            int counter = 0;
+            if(probedSet.contains(i)) {
+                continue;
+            }
+            
+            for(int j = 0; j < a.size(); j++) {
+                if(i.equals(a.get(j))) {
+                    counter++;
+                    probedSet.add(i);
+                }
+            }
+            
+            if(counter == 1) {
+                return i; //Lonely integer found
+            }
+        }
+        // Lonely integer not found
+        return -1;
+    }
+
+}
