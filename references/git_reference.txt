@@ -1,0 +1,85 @@
+=====================
+*** GIT Reference ***
+=====================
+
+Clone project
+git clone ssh://john@example.com/path/to/my-project.git
+
+# Show current branch
+git branch --show-current
+
+# Show all branches
+git branch --list
+
+git checkout
+
+git status
+
+git pull
+
+# Create new branch and switch to it
+git checkout -b [branch_name]
+
+# Commit changes
+git commit -m "commit message"
+
+# Clone to a specific dir
+git clone <repo> <directory>
+
+git add -u
+Revert add
+git reset -- main/dontcheckmein.txt
+
+git push --set-upstream origin ZBL-676_EmployeeSearch_Test-Inventory
+git push --set-upstream origin ZBL-676_Specialist_Test-Inventory
+git push --set-upstream origin ZBL-676_Specialties_Test-Inventory
+
+git checkout master
+git pull --rebase
+git checkout tubranch
+git rebase master
+resuelto los conflicts y add .
+git commit
+git push --force origin ZBL-676_Specialist_Test-Inventory
+git rebase --abort asi empiezas desde 0
+
+#Set a local directory as a git repository
+git init
+
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+# Configure a remote destination
+git remote add <name> <url>
+git remote add origin https://github.com/Markv7ix/quarkus-starting.git# Push changes to remote
+
+git branch --set-upstream-to=origin/main main 
+
+git push <name>
+git push origin
+
+ 
+// Skip smudge - We'll download binary files later in a faster batch
+git lfs install --skip-smudge
+// Do git clone here
+git clone ...
+// Fetch all the binary files in the new clone 
+git lfs pull
+// Reinstate smudge
+git lfs install --force 
+
+Quick setup — if you’ve done this kind of thing before
+
+# Create a new repository on the command line
+echo "# MicroSvcCourse" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Markv7ix/MicroSvcCourse.git
+git push -u origin main
+
+# Push an existing repository from the command line
+git remote add origin https://github.com/Markv7ix/MicroSvcCourse.git
+git branch -M main
+git push -u origin main
