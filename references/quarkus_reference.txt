@@ -1,0 +1,53 @@
+=============Quarkus reference=================
+
+High speed efficency on 1st request, low memory footprint, low component weight
+Kubernetes native Java stack for OpenJDK HotSpot and GraalVM from the best breed Java libraries and standards
+Created in 2018 by Red Hat community aimed to build Microservices, FaaS (Function) and Reactive systems.
+- Quarkus pushes Java to the Cloud
+- Hot reload
+- No need to stop and restart
+- Unified configuration
+- Integration with IDE
+
+Start Quarkus project (Port 8080)
+mvn quarkus:dev
+./mvnw quarkus:dev
+
+Test QUarkus project
+mvn test
+curl http://localhost:8080/api/books
+
+Intializing Quarkus project
+https://code.quarkus.io
+bootstrap.sh
+mvn -U io.quarkus.platform:quarkus-maven-plugin:3.13.3:create \
+	-DprojectGroupId=mv.quarkus.starting \
+	-DprojectArtifactId=rest-book \
+	-DclassName="mv.quarkus.starting.BookResource" \
+	-Dpath="/api/books" \
+	-Dextensions="resteasy-jsonb"
+
+
+https://github.com/agoncal/agoncal-course-quarkus-starting
+
+JAX-RS APIs
+@GET
+@POST
+@Path - Identifies path URI
+@PathParam - Binds the value of a URI parameter or path segment
+@Produces
+@Consumes
+
+Quarkus provides CDI (Context and Dependency Injection)
+@Inject - Container binds object instance
+@Qualifier - Identifies qualifier annotations
+@ApplicationScoped - One instance of a bean per application
+@RequestScoped - One instance of a bean per request
+@Observes - Identifies the event parameter of an observer method
+
+Testing
+@QuarkusTest - Allows a test to start Quarkus (on port 8081) and execute Test suite
+Quarkus supports JUnit 5 (Junit 4 deprecated) and RESTAssured
+
+Configuration
+@ConfigProperty - Binds configuration value into variable or parameter
