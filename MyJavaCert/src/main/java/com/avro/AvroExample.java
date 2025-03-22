@@ -44,7 +44,5 @@ public class AvroExample {
 		System.out.println(getClientIdentifierSchema().toString());
 		System.out.println(getClientSchema().toString());
 		
-		getClientSchema().
-		
 	}
 }
