@@ -71,6 +71,16 @@ class Stack {
 		}
 	}
 
+	private static int stackCount = 0;
+	
+	public static void breakingTheStack(int n) {
+		System.out.println("Stack count: " + stackCount++);
+		if(n>0) {
+			n--;
+			breakingTheStack(n);
+		}
+	}
+	
 	public static void main(String[] args) {
 		Stack stack = new Stack(5);
 
@@ -86,5 +96,7 @@ class Stack {
 		System.out.println("\nAfter popping out");
 		stack.printStack();
 
+		
+		breakingTheStack(10000);
 	}
 }
