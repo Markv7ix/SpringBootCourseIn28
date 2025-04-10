@@ -1,6 +1,5 @@
 package com.mv.java11;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;

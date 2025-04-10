@@ -1,3 +1,4 @@
+package com.mv.javacert;
 
 public class StringExcercises {
 
@@ -8,7 +9,7 @@ public class StringExcercises {
 			tmp = array[array.length - 1 - i];
 			array[array.length - 1 - i] = array[i];
 			array[i] = tmp;
-		}
+		}	
 		
 		return String.valueOf(array);
 	}
